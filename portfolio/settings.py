@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["https://amiroudev.herokuapp.com/"]
 
+CORS_ALLOWED_ORIGIN = True
 
 # Application definition
 
