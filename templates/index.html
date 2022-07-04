@@ -1,0 +1,281 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block content %}
+  <!-- ======= Hero Section ======= -->
+  <main id="main">
+
+  <section id="hero"  style="background: url('{{websites.photoCouverture.url}}')no-repeat top center; background-size: cover;"class="d-flex flex-column justify-content-center align-items-center">
+    <div class="hero-container" data-aos="fade-in">
+      <h1>Amirou Diallo</h1>
+      <p>I'm <span class="typed" data-typed-items="Designer, Developer, Freelancer, Photographer"></span></p>
+    </div>
+  </section><!-- End Hero -->
+
+  
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>About</h2>
+          <p></p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4" data-aos="fade-right">
+            <img src="{{ websites.photoProfil.url }}" class="img-fluid" alt="photo de profil">
+          </div>
+          <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+            <h3>{{ apropos.titre }}</h3>
+            <p class="fst-italic">{{ apropos.description }}</p>
+            <div class="row">
+              <div class="col-lg-8">
+                <ul>
+              
+                  {% for option in apropos.option.all %}
+                    <li><i class="bi bi-chevron-right"></i> <strong>{{ option.titre }}:</strong> <span>{{ option.information }}</span></li>
+                  {% endfor %}
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Facts Section ======= -->
+   
+
+    <!-- ======= Skills Section ======= -->
+    <section id="skills" class="skills section-bg">
+      <div class="container">
+        
+        <div class="section-title">
+          <h2>Compétences</h2>
+          <p>{{ configuration.descriptionCompetence }}</p>
+        </div>
+        
+        <div class="row skills-content">
+          
+          <div class="col-lg-6" data-aos="fade-up">
+
+            {% for competence in competences|slice:":4" %}
+              <div class="progress">
+                <span class="skill">{{ competence.titre }} <i class="val">{{ competence.pourcentage }}%</i></span>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="{{ competence.pourcentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            {% endfor %}
+
+          </div>
+          
+          <div class="col-lg-6" data-aos="fade-up">
+
+            {% for competence in competences|slice:"4:" %}
+            <div class="progress">
+              <span class="skill">{{ competence.titre }} <i class="val">{{ competence.pourcentage }}%</i></span>
+              <div class="progress-bar-wrap">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{ competence.pourcentage }}" aria-valuemin="0"
+                  aria-valuemax="100"></div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          
+        </div>
+        
+      </div>
+    </section><!-- End Skills Section -->
+
+    <!-- ======= Resume Section ======= -->
+    <section id="resume" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Resume</h2>
+          <p></p>
+        </div>
+
+        <div class="row">
+          {% for resume in resumes %}
+            
+            <div class="col-lg-6" data-aos="fade-up" {% if resume.last %}data-aos-delay="100"{% endif %}>        
+              <h3 class="resume-title">{{ resume.titre }}</h3>
+              {% for option in resume.option.all%}
+                <div class="resume-item">
+                  <h4>{{ option.titre }}</h4>
+                  <h5>{{ option.periode }}</h5>
+                  <p><em>{{ option.nomStructure | upper }}</em></p>
+                  
+                  {% if option.description %}
+                    <p>{{ option.description | safe }}</p>
+                  {% endif %}
+                    
+                </div>
+                
+              {% endfor %}
+              
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section><!-- End Resume Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+   <!-- ======= Portfolio Section ======= -->
+   <section id="portfolio" class="portfolio section-bg">
+    <div class="container">
+      
+      <div class="section-title">
+        <h2>Portfolio</h2>
+        <p></p>
+      </div>
+      
+      <div class="row" data-aos="fade-up">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">All</li>
+            
+            {% for categorie in categories %}
+            <li data-filter=".filter-{{ categorie.nom }}">{{ categorie.nom|capfirst }}</li>
+            {% endfor %}
+            
+          </ul>
+        </div>
+      </div>
+      
+      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="100">
+        
+        {% for projet in projets %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-{{ projet.categorie }}">
+            <div class="portfolio-wrap">
+              <img src="{{ projet.image.url }}" class="img-fluid portfolio-picture" alt="projet image">
+              <div class="portfolio-links">
+                <a href="{{ projet.image.url }}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="{{ projet.titre|capfirst }}"><i class="bx bx-plus"></i></a>
+                <a href="{% url 'portfoliodetail' projet.id %}" title="Plus de details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+          
+      </div>
+        
+    </div>
+ 
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+          <div class="col-lg-5 d-flex align-items-stretch">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Adresse :</h4>
+                <p>{{ websites.adresse }}</p>
+              </div>
+              
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                
+                <h4>Email:</h4>
+                <p>{{ websites.email }}</p>
+              </div>
+              
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Téléphone:</h4>
+                <p>{{ websites.telephone }}</p>
+              </div>
+
+              
+            </div>
+
+          </div>
+
+          <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name">Subject</label>
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+              <div class="form-group">
+                <label for="name">Message</label>
+                <textarea class="form-control" name="message" rows="10" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  {% endblock %}
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>iPortfolio</span></strong>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter.' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/typed.js/typed.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
