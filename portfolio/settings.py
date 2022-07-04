@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website.apps.WebsiteConfig',
-    'heroku',
 
 ]
 
@@ -80,11 +79,26 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "d3j6i3o1bojl0j",
+        "USER": "ltigoupkhgtpuf",
+        "PASSWORD": "82d49c3d490680937460bb0bf04871acb58be299f13c1e56aa9ff3953249f181",
+        "HOST": "ec2-52-49-68-244.eu-west-1.compute.amazonaws.com",
+        "PORT": "5432",
+
     }
 }
+
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
