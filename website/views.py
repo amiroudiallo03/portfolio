@@ -28,5 +28,6 @@ def index(request):
 
 
 def portfoliodetail(request, id_projet):
+
     projet = get_object_or_404(models.Projet, id=id_projet)
-    return render(request, "portfolio-details", locals())
+    return render(request, "portfolio-details.html", locals())
